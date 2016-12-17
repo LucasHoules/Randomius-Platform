@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <title>Randomius</title>
+    <link rel="icon" type="image/png" href="{{ global.request.basepath}}/images/favicon.png" />
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+      <link href="{{ global.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ global.request.basepath}}/css/default.css" rel="stylesheet" type="text/css">
+    <!-- FONTS -->
+    <!-- Lato, sans-serif -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Open Sans Condensed -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="author" content="Randomius">
+    <meta name="description" content="">
+    <meta name="keywords" content="randomius, stream, random, streaming" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" />
+    <!-- JS -->
+    <script src="{{global.request.basepath}}/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="{{global.request.basepath}}/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/scrollTo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body data-spy="scroll">
+    <header id="stream">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#!"><img src="images/randomius.png" alt="Randomius" title="Randomius" /></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#stream">Random Live</a></li>
+                        <li><a href="#mosaique">Mosaïque</a></li>
+                        <li><a href="#!">Passez les étapes</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" data-target="#modalConnexion" data-toggle="modal" role="button">Connexion</a></li>
+                        <li><a href="#" data-target="#modalRegister" data-toggle="modal" role="button">S'enregistrer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- /Navigation -->
+
+        <!-- Streaming -->
+        <div id="live-stream">
+            <div class="col-md-7 col-sm-7 col-xs-12 cancel">
+                <iframe src="https://player.twitch.tv/?video=v89333620&!autoplay" frameborder="0" scrolling="no" border="0"></iframe>
+            </div>
+            <div class="col-md-5 col-sm-5 hidden-xs" id="stream-info">
+                <h2>Streamer X</h2>
+                <div class="details">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p>Joue à <span id="game">Overwatch</span></p>
+                        <p>Plateforme <span id="plateforme">Twitch</span></p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <span id="countdown">04:59</span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-xs-12" id="userPrez">
+                        <p>Completely disintermediate web-enabled meta-services for maintainable benefits. Completely monetize standardized results before maintainable paradigms. Compellingly syndicate out-of-the-box growth strategies whereas premium supply
+                            chains.
+                        </p>
+                    </div>
+                    <a href="#!">Continuer à regarder ce stream</a>
+                </div>
+            </div>
+        </div>
+        <!-- /Streaming -->
+    </header>
+
+    <!-- Connexion -->
+    <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="Connexion">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Fermer la fenêtre"><span aria-hidden="true">x</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Connexion</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+
+                        <div class="col-md-12 cancel">
+                            <label>Identifiant</label>
+                            <input type="email" name="email-connexion" id="mail-connexion" required>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <label>Mot de passe</label>
+                            <input type="password" name="password-connexion" id="password-connexion" required>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <div class="input-group">
+                                <input type="checkbox" name="mdp" id="keepmdp">
+                                <label>Retenir le mot de passe ?</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <input type="submit" name="submit" value="Connexion">
+                        </div>
+
+                        <div class="col-md-6 cancel">
+                            <a href="#" class="mdpLost">Mot de passe oublié ?</a>
+                        </div>
+
+                        <div class="col-md-6 cancel">
+                            <a href="#" class="newUser" data-dismiss="modal" data-target="#modalRegister" data-toggle="modal" role="button">Nouvel utilisateur ?</a>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /Connexion  -->
+
+    <!-- S'enregistrer -->
+    <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="Register">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Fermer la fenêtre"><span aria-hidden="true">x</span></button>
+                    <h4 class="modal-title" id="myModalLabel">S'enregistrer</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        <div class="col-md-12 cancel group">
+                            <label>Pseudo</label>
+                            <input type="text" name="pseudo" id="pseudo" required>
+                            <span class="valid-glyph-name glyphicon glyphicon-ok" style="visibility:hidden"></span>
+                            <span class="error-glyph-name glyphicon glyphicon-remove" style="visibility:hidden"></span>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <label>Date de naissance</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select class="selectpicker">
+                                        <option selected disabled>Jour</option>
+                                        <option>01</option>
+                                        <option>02</option>
+                                        <option>03</option>
+                                        <option>04</option>
+                                        <option>05</option>
+                                        <option>06</option>
+                                        <option>07</option>
+                                        <option>08</option>
+                                        <option>09</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                        <option>13</option>
+                                        <option>14</option>
+                                        <option>15</option>
+                                        <option>16</option>
+                                        <option>17</option>
+                                        <option>18</option>
+                                        <option>19</option>
+                                        <option>20</option>
+                                        <option>21</option>
+                                        <option>22</option>
+                                        <option>23</option>
+                                        <option>24</option>
+                                        <option>25</option>
+                                        <option>26</option>
+                                        <option>27</option>
+                                        <option>28</option>
+                                        <option>29</option>
+                                        <option>30</option>
+                                        <option>31</option>
+                                      </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select class="selectpicker">
+                                      <option selected disabled>Mois</option>
+                                      <option>Janvier</option>
+                                      <option>Février</option>
+                                      <option>Mars</option>
+                                      <option>Avril</option>
+                                      <option>Mai</option>
+                                      <option>Juin</option>
+                                      <option>Juillet</option>
+                                      <option>Août</option>
+                                      <option>Septembre</option>
+                                      <option>Octobre</option>
+                                      <option>Novembre</option>
+                                      <option>Décembre</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select class="selectpicker">
+                                      <option selected disabled>Année</option>
+                                      <option>2016</option>
+                                      <option>2015</option>
+                                      <option>2014</option>
+                                      <option>2013</option>
+                                      <option>2012</option>
+                                      <option>2011</option>
+                                      <option>2010</option>
+                                      <option>2009</option>
+                                      <option>2008</option>
+                                      <option>2007</option>
+                                      <option>2006</option>
+                                      <option>2005</option>
+                                      <option>2004</option>
+                                      <option>2003</option>
+                                      <option>2002</option>
+                                      <option>2001</option>
+                                      <option>2000</option>
+                                      <option>1999</option>
+                                      <option>1998</option>
+                                      <option>1997</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <label>Email</label>
+                            <input type="email" name="email-register" id="mail-register" required />
+                            <span class="valid-glyph-mail glyphicon glyphicon-ok" style="visibility:hidden"></span>
+                            <span class="error-glyph-mail glyphicon glyphicon-remove" style="visibility:hidden"></span>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <label id="password-label" alt="New password" placeholder="New password" data-info="Very weak">Mot de passe</label>
+                            <input type="password" name="password-register" id="password" required/>
+                            <div class="progress" id="strength-bar"></div>
+                        </div>
+
+                        <div class="col-md-12 cancel" style="margin:15px 0">
+                            <div class="g-recaptcha" data-sitekey="6LemqQ8TAAAAAJEfcgh4djYQ3kzQFTC5n-vPoJDb"></div>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <div class="input-group">
+                                <input type="checkbox" id="cgu" name="cgu" />
+                                <label class="cgu" for="cgu">J'ai lu et j'accepte les <a href="#">conditions générales d'utilisation</a>.</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 cancel">
+                            <input type="submit" value="S'enregistrer" id="valid-register" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /S'enregistrer  -->
+
+    <!-- Mosaique -->
+    <section id="mosaique" class="container">
+        <h2>Mosaïque</h2>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/starcraft2.jpg" alt="Starcraft II" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Starcraft 2</h2>
+                        <p>Streamer 112</p>
+                        <span>Twitch</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/wow.jpg" alt="World Of Warcraft" />
+                    </div>
+
+                    <div class="details">
+                        <h2>World Of Warcraft</h2>
+                        <p>Streamer 69</p>
+                        <span>Steam</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/csgo.jpg" alt="Counter-Strike : Global Offensive" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Counter-Strike</h2>
+                        <p>Streamer 10</p>
+                        <span>Youtube Gaming</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/d3.jpg" alt="Diablo 3 : Reaper of souls" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Diablo 3</h2>
+                        <p>Streamer 1</p>
+                        <span>Dailymotion Games</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/destiny.jpg" alt="Destiny" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Destiny</h2>
+                        <p>Streamer 780</p>
+                        <span>Hitbox</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/hearthstone.jpg" alt="Hearthstone" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Hearthstone</h2>
+                        <p>Streamer 500</p>
+                        <span>Twitch</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/lol.jpg" alt="League Of Legends" />
+                    </div>
+
+                    <div class="details">
+                        <h2>League Of Legends</h2>
+                        <p>Streamer 403</p>
+                        <span>Twitch</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/dota2.jpg" alt="DOTA 2" />
+                    </div>
+
+                    <div class="details">
+                        <h2>DOTA 2</h2>
+                        <p>Streamer 404</p>
+                        <span>not found</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 cancel">
+                <a href="#" class="gamelink">
+                    <div class="game">
+                        <img src="images/games/rainbowsix.jpg" alt="Rainbow Six : Siege" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Rainbow Six : Siege</h2>
+                        <p>Streamer 391</p>
+                        <span>Steam</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="button" class="randomize" id="randomize"><i class="material-icons">cached</i></button>
+        </div>
+    </section>
+    <!-- /Mosaique -->
+
+    <!-- Prez -->
+    <section id="presentation" class="container-fluid">
+        <div class="container">
+            <h3>Suivez-nous</h3>
+            <div class="rs">
+                <a href="#!" class="facebook">Facebook</a> <a href="#!" class="twitter">Twitter</a> <a href="#!" class="google">Google Plus</a>
+            </div>
+        </div>
+    </section>
+    <!-- /Prez -->
+
+    <div class="container-fluid cancel">
+        <footer>
+            <div class="container">
+                <p><a href="#">Mentions Légales</a> - <a href="#">Conditions d'utilisations</a> - <a href="#">Contact</a></p>
+                <p>&copy; 2016 Randomius</p>
+            </div>
+        </footer>
+    </div>
+    <!-- Script -->
+    <script src="https://cdn.rawgit.com/dropbox/zxcvbn/v1.0/zxcvbn.js"></script>
+    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.6.1/dist/progressbar.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/stronger.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //REGISTER
+            //Pseudo
+            $('#pseudo').on('input', function() {
+                var input = $(this);
+                var reg = /^[a-z0-9]+$/i;
+                var is_name = reg.test(input.val());
+                if (is_name) {
+                    input.removeClass("invalid").addClass("valid");
+                    $('.valid-glyph-name').css('visibility', 'visible');
+                    $('.error-glyph-name').css('visibility', 'hidden')
+                } else {
+                    input.removeClass("valid").addClass("invalid");
+                    $('.error-glyph-name').css('visibility', 'visible');
+                    $('.valid-glyph-name').css('visibility', 'hidden')
+                }
+            });
+
+            //Email
+            $('#mail-register').on('input', function() {
+                var input = $(this);
+                var re =
+                    /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+                var is_email = re.test(input.val());
+                if (is_email) {
+                    input.removeClass("invalid").addClass("valid");
+                    $('.valid-glyph-mail').css('visibility', 'visible');
+                    $('.error-glyph-mail').css('visibility', 'hidden')
+                } else {
+                    input.removeClass("valid").addClass("invalid");
+                    $('.error-glyph-mail').css('visibility', 'visible');
+                    $('.valid-glyph-mail').css('visibility', 'hidden')
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
